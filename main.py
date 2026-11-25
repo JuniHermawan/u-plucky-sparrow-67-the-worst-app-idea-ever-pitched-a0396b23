@@ -28,6 +28,10 @@ def main() -> None:
     with open(OUTPUT_PATH, "w", encoding="utf-8", newline="\n") as f:
         f.write(ENTRY + "\n")
     os.chmod(OUTPUT_PATH, 0o644)
+    # Gate self-check: exactly one line, 1-240 chars, no trailing blank line.
+    with open(OUTPUT_PATH, encoding="utf-8") as f:
+        lines = f.read().splitlines()
+    assert len(lines) == 1 and lines[0] == ENTRY, "entry.txt must hold exactly the one pitch line"
 
 
 if __name__ == "__main__":
